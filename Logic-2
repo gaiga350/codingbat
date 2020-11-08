@@ -1,0 +1,18 @@
+"""
+We want to make a row of bricks that is goal inches long.
+We have a number of small bricks (1 inch each) and big bricks
+(5 inches each). Return True if it is possible to make the goal
+by choosing from the given bricks. This is a little harder than
+it looks and can be done without any loops. See also: Introduction to MakeBricks
+""" 
+# Recursion depth limit
+reached = False
+def make_bricks(small,big,goal):
+    global reached
+    if goal==0:
+        reached = True
+    if small>0:
+        make_bricks(small-1,big,goal-1)
+    if big>0:
+        make_bricks(small,big-1,goal-5)
+    return reached
