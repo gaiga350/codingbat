@@ -5,10 +5,12 @@ We have a number of small bricks (1 inch each) and big bricks
 by choosing from the given bricks. This is a little harder than
 it looks and can be done without any loops. See also: Introduction to MakeBricks
 """ 
-# Recursion depth limit
+# Recursion depth limit (not working for some reason)
 reached = False
 def make_bricks(small,big,goal):
     global reached
+   if reached:
+        return
     if goal==0:
         reached = True
     if small>0:
@@ -16,6 +18,27 @@ def make_bricks(small,big,goal):
     if big>0:
         make_bricks(small,big-1,goal-5)
     return reached
+
+#No recursion
+def make_bricks(small,big,goal):
+    temp_small, temp_goal = small, goal
+    goalhit = False
+    if big>=1:
+        for bigger in range(1,big+1):
+            goal = temp_goal
+            goal -= (5*bigger)
+            if goal == 0:
+                goalhit = True
+                break
+            if goal <= 0:
+                break
+            goal -= small
+            if goal <= 0:
+                goalhit = True
+                break
+    elif goal-small<=0:
+        return True
+    return goalhit
 
 """
 Given 3 int values, a b c, return their sum. However, if one of
@@ -62,3 +85,76 @@ level as the main no_teen_sum().
 def no_teen_sum(a, b, c):
     return sum([x if x == 15 else x if x == 16 else 0 if 13 <= x else x for x in [a,b,c]])
     
+"""
+For this problem, we'll round an int value up to the next multiple
+of 10 if its rightmost digit is 5 or more, so 15 rounds up to 20.
+Alternately, round down to the previous multiple of 10 if its rightmost
+digit is less than 5, so 12 rounds down to 10. Given 3 ints, a b c, return
+the sum of their rounded values. To avoid code repetition, write a separate
+helper "def round10(num):" and call it 3 times. Write the helper entirely
+below and at the same indent level as round_sum().
+"""
+def round10(num):
+    if num < 5:
+        num = 0
+    elif num >= 5 and num <=10:
+        num = 10
+    else:
+        num = num / 10
+        num = round(num)
+        num *= 10
+    return int(num)
+def round_sum(a, b, c):
+    return sum(list(map(lambda x: round10(x),[a,b,c])))
+
+#working for codingbat
+def round10(num):
+    num = float(num)
+    if num < 5:
+        num = 0
+    elif num >= 5 and num <=10:
+        num = 10
+    else:
+        num = num / 10
+        num = round(num)
+        num *= 10
+    return int(num)
+def round_sum(a, b, c):
+    return sum(list(map(lambda x: round10(x),[a,b,c])))
+
+"""
+Given three ints, a b c, return True if one of b or c is "close"
+(differing from a by at most 1), while the other is "far", differing
+from both other values by 2 or more. Note: abs(num) computes the
+absolute value of a number.
+"""
+def close_far(a, b, c):
+    if abs(b-a) <= 1 and abs(c-a) >= 2 and abs(c-b) >= 2 or abs(c-a) <= 1 and abs(b-a) >= 2 and abs(b-c) >= 2:
+        return True
+    return False
+
+"""
+We want make a package of goal kilos of chocolate. We have small bars
+(1 kilo each) and big bars (5 kilos each). Return the number of small
+bars to use, assuming we always use big bars before small bars. Return
+-1 if it can't be done.
+"""
+#timed out for some reason
+def make_chocolate(small, big, goal):
+    temp_goal, temp_small = goal, small
+    if goal >= 5:
+        for bigger in range(big):
+            goal = temp_goal
+            goal -= 5*bigger
+            if goal == 0:
+                small = 0
+                break
+            goal -= small
+            if goal <= 0:
+                small = goal+temp_small
+                break
+    else:
+        return goal-small+small
+    if goal > 0:
+        return -1
+    return small
