@@ -1,0 +1,38 @@
+"""
+Given a string, return a string where for every char in the original, there are two chars.
+"""
+def double_char(str):
+    return ''.join([x*2 for x in str])
+
+"""
+Return the number of times that the string "hi" appears anywhere in the given string.
+"""
+def count_hi(str):
+    accumulator = 0
+    for index in range(len(str)):
+        if str[index:index+2] == 'hi':
+            accumulator += 1
+    return accumulator
+
+"""
+Return True if the string "cat" and "dog" appear the same number of times in the given string.
+"""
+def cat_dog(str):
+    cats, dogs = 0, 0
+    for index in range(len(str)):
+        if str[index:index+3] == 'cat':
+            cats += 1
+        if str[index:index+3] == 'dog':
+            dogs += 1
+    return cats == dogs
+
+"""
+Return the number of times that the string "code" appears anywhere in the given string, except we'll accept any letter for the 'd', so "cope" and "cooe" count.
+"""
+def count_code(str):
+    accumulator = 0
+    code = ['co'+chr(x)+'e' for x in range(97,123)]
+    for index in range(len(str)):
+        if str[index:index+4] in code:
+            accumulator += 1
+    return accumulator

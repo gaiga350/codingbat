@@ -139,7 +139,7 @@ We want make a package of goal kilos of chocolate. We have small bars
 bars to use, assuming we always use big bars before small bars. Return
 -1 if it can't be done.
 """
-#timed out for some reason
+#timing out for some reason
 def make_chocolate(small, big, goal):
     temp_goal, temp_small = goal, small
     if goal >= 5:
