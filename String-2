@@ -36,3 +36,34 @@ def count_code(str):
         if str[index:index+4] in code:
             accumulator += 1
     return accumulator
+
+"""
+Given two strings, return True if either of the strings
+appears at the very end of the other string, ignoring upper/lower
+case differences (in other words, the computation should not be
+"case sensitive"). Note: s.lower() returns the lowercase version of a string.
+"""
+def end_other(a, b):
+    if len(a)<len(b):
+        if b[-len(a):].lower() == a.lower():
+            return True
+    else:
+        if a[-len(b):].lower() == b.lower():
+            return True
+    return False
+
+"""
+Return True if the given string contains an appearance of "xyz"
+where the xyz is not directly preceeded by a period (.). So "xxyz"
+counts but "x.xyz" does not.
+"""
+def xyz_there(str):
+    res = False
+    for index in range(len(str)):
+        if str[index:index+3] == 'xyz':
+            if str[index-1] != '.':
+                res = True
+            else:
+                res = False
+    return res
+        
