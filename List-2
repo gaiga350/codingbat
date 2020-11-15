@@ -32,3 +32,31 @@ def sum13(nums):
             index +=1
         index +=1
     return sum(my_list)
+
+"""
+Return the sum of the numbers in the array, except ignore
+sections of numbers starting with a 6 and extending to the
+next 7 (every 6 will be followed by at least one 7).
+Return 0 for no numbers.
+"""
+def sum67(nums):
+    index = 0
+    new_nums = []
+    while index != len(nums):
+        if nums[index] == 6:
+            while nums[index]!=7:
+                index += 1
+        else:
+            new_nums.append(nums[index])
+        index += 1
+    return sum(new_nums)
+
+"""
+Given an array of ints, return True if the array contains
+a 2 next to a 2 somewhere.
+"""
+def has22(nums):
+    for index in range(len(nums)-1):
+        if nums[index] == 2 and nums[index+1]==2:
+            return True
+    return False
