@@ -70,3 +70,12 @@ def count8(n):
     if n%10==8:
         total += 1
     return total+count8(n//10)
+
+"""
+Given base and n that are both 1 or more, compute recursively (no loops)
+the value of base to the n power, so powerN(3, 2) is 9 (3 squared).
+"""
+def powerN(num, times):
+    if times == 1:
+        return num
+    return num * powerN(num, times - 1)
