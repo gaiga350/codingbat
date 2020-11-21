@@ -79,3 +79,38 @@ def powerN(num, times):
     if times == 1:
         return num
     return num * powerN(num, times - 1)
+
+"""
+Given a string, compute recursively (no loops) the
+number of lowercase 'x' chars in the string.
+"""
+def countX(str, count = 0):
+    if len(str)==0:
+        return count
+    if str[0] == 'x':
+        count += 1
+    return countX(str[1::],count)
+
+"""
+Given a string, compute recursively (no loops)
+the number of times lowercase "hi" appears in the string.
+"""
+def countHi(str, count = 0):
+    if len(str)==0:
+        return count
+    if str[0:2] == 'hi':
+        count += 1
+    return countHi(str[1::],count)
+
+"""
+Given a string, compute recursively (no loops) a new
+string where all the lowercase 'x' chars have been changed to 'y' chars.
+"""
+def changeXY(string, myString = ''):
+    if len(string) == 0:
+        return myString
+    if string[0] == 'x':
+        myString += 'y'
+    else:
+        myString += string[0]
+    return changeXY(string[1::], myString)
