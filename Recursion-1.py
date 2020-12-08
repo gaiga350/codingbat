@@ -128,3 +128,13 @@ def changePi(string, new_string = ''):
     else:
         new_string += string[0]
     return changePi(string[1::], new_string)
+
+'''
+Given a string, compute recursively a new string where all the 'x' chars have been removed.
+'''
+def String_noX(my_string, new_string=''):
+    if len(my_string) == 0:
+        return new_string
+    if my_string[0] != 'x':
+        new_string +=my_string[0]
+    return String_noX(my_string[1::], new_string)
